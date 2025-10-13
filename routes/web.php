@@ -4,6 +4,10 @@ use App\Http\Controllers\MahasiswaController;
 
 use App\Http\Controllers\MatakuliahController;
 
+use App\Http\Controllers\DashboardController;
+
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
