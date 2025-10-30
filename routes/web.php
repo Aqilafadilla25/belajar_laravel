@@ -1,59 +1,57 @@
 <?php
 
 use App\Http\Controllers\MahasiswaController;
-
 use App\Http\Controllers\MatakuliahController;
-
-use App\Http\Controllers\DashboardController;
-
-
-
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\UserController;
 
 Route::get('/pcr', function () {
-    return 'Selamat Datang di Website Kampus PCR';
+    return 'Selamat Datang di Website Kampus PCR!';
 });
 
 Route::get('/mahasiswa', function () {
-    return 'Hallo Mahasiswa';
+    return 'Halo Mahasiswa';
 });
 
-Route::get('/nama/{Aqila}', function ($param1) {
+Route::get('/nama/{Yolanda}', function ($param1) {
     return 'Nama Saya: '.$param1;
 });
 
-Route::get('/nim/{param1}', function ($param1 = '') {
-    return 'Nim Saya: '.$param1;
+Route::get('/nim/{pram1?}', function ($param1 = '') {
+    return 'NIM Saya: '.$param1;
 });
 
+Route::get('/mahasiswa/{Yolanda}', [MahasiswaController::class, 'show']);
 
-Route::get('/mahasiswa', function () {
-    return 'Hallo Mahasiswa ';
-});
-
-Route::get('/mahasiswa/{param1}', [MahasiswaController::class, 'show']);
-
-Route::get('/about', function () {
+Route::get('/about', function (){
     return view('halaman-about');
 });
 
+Route::get('/matakuliahshow', [MatakuliahController::class, 'show']);
+Route::get('/matakuliahindex', [MatakuliahController::class, 'index']);
+Route::get('/matakuliahcreate', [MatakuliahController::class, 'create']);
+Route::get('/matakuliahstore', [MatakuliahController::class, 'store']);
+Route::get('/matakuliahedit', [MatakuliahController::class, 'edit']);
+Route::get('/matakuliahupdate', [MatakuliahController::class, 'update']);
+Route::get('/matakuliahdestroy', [MatakuliahController::class, 'destroy']);
 
-Route::get('/matakuliah/{$param1?}', [MatakuliahController::class, 'show']);
-Route::get('/matakuliahshow', [MatakuliahController::class, 'index']);
-Route::get('/matakuliahshow', [MatakuliahController::class, 'create']);
-Route::get('/matakuliahshow', [MatakuliahController::class, 'store']);
-Route::get('/matakuliahshow', [MatakuliahController::class, 'edit']);
-Route::get('/matakuliahshow', [MatakuliahController::class, 'update']);
-Route::get('/matakuliahshow', [MatakuliahController::class, 'destroy']);
+Route::get('/matakuliah/{param1?}', [MahasiswaController::class, 'show']);
+Route::get('/home', [HomeController::class, 'index'])-> name('home');
 
+Route::post('question/store', [QuestionController::class, 'store'])
+            -> name('question.store');
 
+Route::get('dashboard', [DashboardController::class, 'index'])
+            -> name('dashboard');
 
+Route::resource('pelanggan', PelangganController::class);
+Route::get('/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('pelanggan.edit');
+Route::put('/pelanggan/{id}', [PelangganController::class, 'update'])->name('pelanggan.update');
 
-
-
-
-
+Route::resource('user', UserController::class);
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
