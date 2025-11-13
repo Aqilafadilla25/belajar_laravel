@@ -36,14 +36,13 @@ class MahasiswaController extends Controller
     public function show(string $param1)
     {
         if($param1 == 'detail'){
-            return view('halaman-mahasiswa-detail');
-<<<<<<< HEAD
+            return view('halaman-mahasiswa-detail')
+
         }else if ($param1 == 'profil'){
             return view('halaman-mahasiswa-profil')
-=======
         }else if($param1 == 'profil'){
             return view('halamacbncfgn-mahasiswa-profil');
->>>>>>> a5ad2d1a873514ca24ae001058208a3324e49192
+
         }
     }
 
